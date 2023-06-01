@@ -1,0 +1,24 @@
+﻿using Unity.VisualScripting;
+using UnityEngine;
+public class PlayerAirborneState : PlayerState
+{
+    protected override float acceleration { get { return controller.AirFriction * controller.MoveSpeed; } }
+    public PlayerAirborneState(PlayerController _controller) : base(_controller)
+    {
+    }
+
+    public override void UpdateState()
+    {
+        base.UpdateState();
+        ResolveInputVector(movementInputVector);
+        Accelerate();
+
+        if (controller.Velocity.y <= 0) {
+            if (controller.IsGrounded) {
+                stateController.SwitchState(new PlayerStandState(controller));
+            }
+        }
+
+        HandleButtonMaps();
+    }
+}

@@ -13,6 +13,8 @@ public class PlayerAirborneState : PlayerState
         ResolveInputVector(movementInputVector);
         Accelerate();
 
+        controller.ApplyGravity();
+
         if (controller.Velocity.y <= 0) {
             if (controller.IsGrounded) {
                 stateController.SwitchState(new PlayerStandState(controller));

@@ -19,7 +19,8 @@ public class PlayerGroundedState : PlayerState
     {
         Vector3 targetVelocity = controller.TargetVelocity; targetVelocity.y += controller.Velocity.y;
         //Since we're aligning input along the slope, the interpolation needs to happen with slope alignment as a starting point
-        Vector3 correctedVelocity = Vector3.ProjectOnPlane(controller.Velocity, controller.CurrentGround.normal);
+        Vector3 correctedVelocity = controller.GroundAngle < controller.CharacterController.slopeLimit ? 
+            Vector3.ProjectOnPlane(controller.Velocity, controller.CurrentGround.normal) : controller.Velocity;
         controller.Velocity = Vector3.MoveTowards(correctedVelocity, targetVelocity, acceleration * Time.deltaTime);
     }
 
@@ -33,7 +34,8 @@ public class PlayerGroundedState : PlayerState
     protected override void ResolveInputVector(Vector3 _direction)
     {
         //Prevent slope bouncing
-        Vector3 projectedVelocity = Vector3.ProjectOnPlane(_direction, controller.CurrentGround.normal);
+        Vector3 projectedVelocity = controller.GroundAngle < controller.CharacterController.slopeLimit ? 
+                Vector3.ProjectOnPlane(_direction, controller.CurrentGround.normal) : _direction;
 
         float targetSpeed = moveSpeed;
         if (controller.ShouldSlide) {
@@ -57,6 +59,9 @@ public class PlayerGroundedState : PlayerState
     public override void UpdateState()
     {
         base.UpdateState();
+        if(!controller.IsGrounded) {
+            controller.ApplyGravity();
+        }
         if (!controller.isSoftGrounded) {
             stateController.SwitchState(new PlayerAirborneState(controller));
             return;

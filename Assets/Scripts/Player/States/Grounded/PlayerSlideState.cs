@@ -4,12 +4,15 @@ public class PlayerSlideState : PlayerGroundedState
     public PlayerSlideState(PlayerController _controller) : base(_controller)
     {
     }
-
+    protected override float acceleration
+    {
+        get { return controller.SlideFriction * controller.MoveSpeed; }
+    }
     protected override float GetSlopeSpeed()
     {
         float t = Mathf.InverseLerp(0, 60, controller.GroundAngle);
-        float accelerator = Mathf.Lerp(1, 20, t);
-        return t * 150;
+        float accelerator = Mathf.Lerp(1, 45, t);
+        return t * accelerator;
     }
 
     protected override void ResolveInputVector(Vector3 _direction)

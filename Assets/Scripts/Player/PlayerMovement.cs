@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public partial class PlayerController : MonoBehaviour
 {
@@ -11,7 +12,9 @@ public partial class PlayerController : MonoBehaviour
     [SerializeField] private float gravityMultiplier;
     [SerializeField] private float groundFriction;
     [SerializeField] private float slideAngle;
+    [SerializeField] private float slideFriction;
     [SerializeField] private float groundedCast;
+    [SerializeField] private float airborneGroundedCast;
 
     private Vector3 velocity = Vector3.zero;
     private Vector3 targetVelocity = Vector3.zero;
@@ -28,6 +31,7 @@ public partial class PlayerController : MonoBehaviour
     public float GroundFriction { get { return groundFriction; } }
     public float GravityMultiplier { get { return gravityMultiplier; } }
     public float SlideAngle { get { return slideAngle; } }
+    public float SlideFriction { get { return slideFriction; } }
     public Vector3 Velocity { get { return velocity; } set { velocity = value; } }
     public Vector3 TargetVelocity { get { return targetVelocity; } set { targetVelocity = value; } }
     public bool IsGrounded { get { return isGrounded; } }
@@ -38,11 +42,24 @@ public partial class PlayerController : MonoBehaviour
     #region Methods
     private bool CheckGrounded()
     {
+        float dist = isGrounded ? groundedCast : airborneGroundedCast;
         int mask = 1;
-        bool cast = Physics.SphereCast(transform.position, characterController.radius, -transform.up, out currentGround, groundedCast, mask, QueryTriggerInteraction.Ignore);
+        bool cast = Physics.CapsuleCast(GetCapsuleBottomCenterpoint(), GetCapsuleTopCenterpoint(characterController.height),
+                    characterController.radius, Vector3.down, out currentGround, dist, mask,
+                    QueryTriggerInteraction.Ignore);
         groundAngle = Vector3.Angle(currentGround.normal, transform.up);
         return cast;
 
+    }
+ 
+    Vector3 GetCapsuleBottomCenterpoint()
+    {
+        return transform.position + (transform.up * characterController.radius);
+    }
+   
+    Vector3 GetCapsuleTopCenterpoint(float _height)
+    {
+        return transform.position + (transform.up * (_height - characterController.radius));
     }
 
     /// <summary>
@@ -66,12 +83,9 @@ public partial class PlayerController : MonoBehaviour
 
 
 
-    private void ApplyGravity()
+    public void ApplyGravity()
     {
-        isGrounded = CheckGrounded();
-        if (isGrounded) {
-            lastGrounded = Time.time;
-        } else { velocity.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime; }
+        velocity.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
     }
     #endregion
 }

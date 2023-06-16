@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 public class PlayerState : State
 {
-    protected PlayerController controller;
+    protected readonly PlayerController controller;
     protected Vector3 movementInputVector;
 
     public PlayerState(PlayerController _controller)

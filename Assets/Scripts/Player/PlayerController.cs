@@ -1,15 +1,22 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public partial class PlayerController : MonoBehaviour
+public partial class PlayerController : MonoBehaviour, IDamageable
 {
     private CharacterController characterController;
 
     private PlayerInput playerInput;
-    private StateController stateController = new StateController();
+    private StateController stateController;
 
     public PlayerInput PlayerInput { get { return playerInput; } }
     public CharacterController CharacterController { get { return characterController; } }
+    
+    PlayerController() 
+    {
+        health = new Stat(100, 100);
+        stateController = new StateController();
+    }
+    
     void Awake()
     {
         playerInput = new PlayerInput();
@@ -57,5 +64,7 @@ public partial class PlayerController : MonoBehaviour
         GUI.Label(new Rect(0, 40, 300, 20), "Is Grounded: " + isGrounded.ToString());
         GUI.Label(new Rect(0, 60, 300, 20), "Target Velocity: " + targetVelocity.ToString());
         GUI.Label(new Rect(0, 80, 300, 20), "Current Velocity: " + velocity.ToString());
+
+        GUI.Label(new Rect(0, Screen.height - 30, 300, 20), "Health: " + health.value);
     }
 }

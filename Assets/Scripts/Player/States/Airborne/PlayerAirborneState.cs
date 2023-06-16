@@ -17,6 +17,7 @@ public class PlayerAirborneState : PlayerState
 
         if (controller.Velocity.y <= 0) {
             if (controller.IsGrounded) {
+                controller.OnLand();
                 stateController.SwitchState(new PlayerStandState(controller));
             }
         }

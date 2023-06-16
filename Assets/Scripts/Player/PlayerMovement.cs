@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
-public partial class PlayerController : MonoBehaviour
+public partial class PlayerController : MonoBehaviour, IDamageable
 {
     #region Properties
     [Header("Movement Properties")]

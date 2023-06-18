@@ -7,9 +7,12 @@ public partial class PlayerController : MonoBehaviour, IDamageable
 
     private PlayerInput playerInput;
     private StateController stateController;
+    [SerializeField]
+    private Camera playerCamera;
 
-    public PlayerInput PlayerInput { get { return playerInput; } }
     public CharacterController CharacterController { get { return characterController; } }
+    public PlayerInput PlayerInput { get { return playerInput; } }
+    public Camera PlayerCamera { get { return playerCamera; } }
     
     PlayerController() 
     {
@@ -50,11 +53,17 @@ public partial class PlayerController : MonoBehaviour, IDamageable
 
         stateController.Update();
         characterController.Move(velocity * Time.deltaTime);
+        OrientPlayerToDirection();
     }
 
     void FixedUpdate()
     {
         stateController.FixedUpdate();
+    }
+
+    void LateUpdate()
+    {
+        MoveCamera();
     }
 
     private void OnGUI()
@@ -64,6 +73,7 @@ public partial class PlayerController : MonoBehaviour, IDamageable
         GUI.Label(new Rect(0, 40, 300, 20), "Is Grounded: " + isGrounded.ToString());
         GUI.Label(new Rect(0, 60, 300, 20), "Target Velocity: " + targetVelocity.ToString());
         GUI.Label(new Rect(0, 80, 300, 20), "Current Velocity: " + velocity.ToString());
+        GUI.Label(new Rect(0, 100, 300, 20), "Camera X: " + cameraX);
 
         GUI.Label(new Rect(0, Screen.height - 30, 300, 20), "Health: " + health.value);
     }

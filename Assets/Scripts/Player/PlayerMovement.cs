@@ -53,6 +53,20 @@ public partial class PlayerController : MonoBehaviour, IDamageable
 
     }
 
+    public bool IsOnStep()
+    {
+        RaycastHit ground;
+        Vector3 origin = new Vector3(transform.position.x, currentGround.point.y, transform.position.z);
+        Debug.DrawLine(origin, currentGround.point + (Vector3.down * 0.4f), Color.red);
+        if (Physics.Raycast(origin, Vector3.down, out ground, 0.4f, 1, QueryTriggerInteraction.Ignore)) {
+            Debug.DrawLine(ground.point, ground.point + (ground.normal * 1), Color.green);
+            if (Vector3.Angle(ground.normal, Vector3.up) < 10) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     Vector3 GetCapsuleBottomCenterpoint()
     {
         return transform.position + (transform.up * characterController.radius);

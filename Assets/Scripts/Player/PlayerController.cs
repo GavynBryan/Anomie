@@ -73,7 +73,6 @@ public partial class PlayerController : MonoBehaviour, IDamageable
         GUI.Label(new Rect(0, 40, 300, 20), "Is Grounded: " + isGrounded.ToString());
         GUI.Label(new Rect(0, 60, 300, 20), "Target Velocity: " + targetVelocity.ToString());
         GUI.Label(new Rect(0, 80, 300, 20), "Current Velocity: " + velocity.ToString());
-        GUI.Label(new Rect(0, 100, 300, 20), "Camera X: " + cameraX);
 
         GUI.Label(new Rect(0, Screen.height - 30, 300, 20), "Health: " + health.value);
     }

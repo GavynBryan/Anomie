@@ -91,7 +91,7 @@ public partial class PlayerController : MonoBehaviour, IDamageable
     {
         transform.rotation = Quaternion.Slerp(transform.rotation,
             Quaternion.LookRotation(TargetDirection, transform.up),
-            3.5f * Time.deltaTime);
+            6f * Time.deltaTime);
     }
     #endregion
 }

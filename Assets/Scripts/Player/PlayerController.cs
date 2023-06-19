@@ -7,9 +7,12 @@ public partial class PlayerController : MonoBehaviour, IDamageable
 
     private PlayerInput playerInput;
     private StateController stateController;
+    [SerializeField]
+    private Camera playerCamera;
 
-    public PlayerInput PlayerInput { get { return playerInput; } }
     public CharacterController CharacterController { get { return characterController; } }
+    public PlayerInput PlayerInput { get { return playerInput; } }
+    public Camera PlayerCamera { get { return playerCamera; } }
     
     PlayerController() 
     {
@@ -50,11 +53,17 @@ public partial class PlayerController : MonoBehaviour, IDamageable
 
         stateController.Update();
         characterController.Move(velocity * Time.deltaTime);
+        OrientPlayerToDirection();
     }
 
     void FixedUpdate()
     {
         stateController.FixedUpdate();
+    }
+
+    void LateUpdate()
+    {
+        MoveCamera();
     }
 
     private void OnGUI()

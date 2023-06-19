@@ -34,6 +34,7 @@ public partial class PlayerController : MonoBehaviour, IDamageable
     public float SlideFriction { get { return slideFriction; } }
     public Vector3 Velocity { get { return velocity; } set { velocity = value; } }
     public Vector3 TargetVelocity { get { return targetVelocity; } set { targetVelocity = value; } }
+    public Vector3 TargetDirection { get { return Quaternion.Euler(0, cameraX, 0) * Vector3.forward; } }
     public bool IsGrounded { get { return isGrounded; } }
     public RaycastHit CurrentGround { get { return currentGround; } }
     public float GroundAngle { get { return groundAngle; } }
@@ -97,11 +98,16 @@ public partial class PlayerController : MonoBehaviour, IDamageable
         get { return groundAngle >= slideAngle; }
     }
 
-
-
     public void ApplyGravity()
     {
         velocity.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
+    }
+
+    protected void OrientPlayerToDirection()
+    {
+        transform.rotation = Quaternion.Slerp(transform.rotation,
+            Quaternion.LookRotation(TargetDirection, transform.up),
+            6f * Time.deltaTime);
     }
     #endregion
 }

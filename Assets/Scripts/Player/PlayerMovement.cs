@@ -52,14 +52,16 @@ public partial class PlayerController : MonoBehaviour, IDamageable
 
     }
 
+    /// <summary>
+    /// Meant to be chcked in conjunction with ShouldSlide, determines whether or not the player is close enough to a walkable surface,
+    /// even if they are on a slope.
+    /// </summary
     public bool IsOnStep()
     {
         RaycastHit ground;
         Vector3 origin = new Vector3(transform.position.x, currentGround.point.y, transform.position.z);
-        Debug.DrawLine(origin, currentGround.point + (Vector3.down * 0.4f), Color.red);
         if (Physics.Raycast(origin, Vector3.down, out ground, 0.4f, 1, QueryTriggerInteraction.Ignore)) {
-            Debug.DrawLine(ground.point, ground.point + (ground.normal * 1), Color.green);
-            if (Vector3.Angle(ground.normal, Vector3.up) < 10) {
+            if (Vector3.Angle(ground.normal, Vector3.up) < slideAngle) {
                 return true;
             }
         }

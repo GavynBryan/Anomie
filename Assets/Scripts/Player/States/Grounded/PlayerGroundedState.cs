@@ -38,7 +38,7 @@ public class PlayerGroundedState : PlayerState
                 Vector3.ProjectOnPlane(_direction, controller.CurrentGround.normal) : _direction;
 
         float targetSpeed = moveSpeed;
-        if (controller.ShouldSlide) {
+        if (controller.ShouldSlide && !controller.IsOnStep()) {
             //Let player fight the decceleration until their velocity gets to low or they turn in the direction of the slope
             if (controller.Velocity.Flatten().magnitude <= .01f || Vector3.Angle(controller.Velocity, -SlopeDirection) >= 85) {
                 stateController.SwitchState(new PlayerSlideState(controller));

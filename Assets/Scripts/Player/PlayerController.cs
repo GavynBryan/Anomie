@@ -42,6 +42,11 @@ public partial class PlayerController : MonoBehaviour, IDamageable
         
         groundedCast += characterController.skinWidth;
         airborneGroundedCast += characterController.skinWidth;
+
+        //For testing purposes only, revise later
+        currentWeapon = GetComponentInChildren<WeaponBase>();
+        currentWeapon.AssignToPlayer(this);
+        weaponHolder = playerCamera.transform.Find("Weapon");
     }
 
     void Update()
@@ -53,7 +58,6 @@ public partial class PlayerController : MonoBehaviour, IDamageable
 
         stateController.Update();
         characterController.Move(velocity * Time.deltaTime);
-        OrientPlayerToDirection();
     }
 
     void FixedUpdate()

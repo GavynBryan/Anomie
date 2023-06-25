@@ -7,6 +7,7 @@ public class PlayerInput
     private InputAction move;
     private InputAction look;
     private InputAction jump;
+    private InputAction fire;
     public PlayerInput()
     {
         controls = new PlayerControls();
@@ -14,6 +15,7 @@ public class PlayerInput
         move = controls.Grounded.Move;
         look = controls.Grounded.Look;
         jump = controls.Grounded.Jump;
+        fire = controls.Grounded.Fire;
     }
 
     public void EnableControls()
@@ -21,6 +23,7 @@ public class PlayerInput
         move.Enable();
         look.Enable();
         jump.Enable();
+        fire.Enable();
     }
 
     public void DisableControls()
@@ -28,6 +31,7 @@ public class PlayerInput
         move.Disable();
         look.Disable();
         jump.Disable();
+        fire.Disable();
     }
 
     public Vector3 GetMovementVector()
@@ -50,4 +54,13 @@ public class PlayerInput
         return jump.IsPressed();
     }
 
+    public bool GetFirePressed()
+    {
+        return fire.WasPressedThisFrame();
+    }
+
+    public bool GetFireHeld()
+    {
+        return fire.IsPressed();
+    }
 }

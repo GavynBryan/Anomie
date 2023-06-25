@@ -6,6 +6,7 @@ public class PlayerStandState : PlayerGroundedState
     }
     public override void HandleButtonMaps()
     {
+        base.HandleButtonMaps();
         if(controller.PlayerInput.GetJumpPressed()) {
             stateController.SwitchState(new PlayerJumpState(controller));
         }

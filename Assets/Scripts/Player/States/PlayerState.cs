@@ -26,7 +26,14 @@ public class PlayerState : State
         return Quaternion.LookRotation(controller.transform.forward) * controller.PlayerInput.GetMovementVector();
     }
 
-    public virtual void HandleButtonMaps() { }
+    public virtual void HandleButtonMaps() 
+    {
+        if (controller.PlayerInput.GetFirePressed()) {
+            controller.FireWeapon();
+        } else if(controller.PlayerInput.GetFireHeld()) {
+            controller.FireWeaponHold();
+        }
+    }
 
     protected virtual void Accelerate()
     {

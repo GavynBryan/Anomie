@@ -39,6 +39,7 @@ public class PlayerJumpState : PlayerAirborneState
 
     public override void HandleButtonMaps()
     {
+        base.HandleButtonMaps();
         Vector3 velocity = controller.Velocity;
         if (!controller.PlayerInput.GetJumpHeld() && velocity.y > 1) {
             velocity.y /= 2;

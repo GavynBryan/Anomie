@@ -10,11 +10,13 @@ public enum WeaponState
 public partial class PlayerController : MonoBehaviour, IDamageable
 {
     private Stat health;
-    private WeaponState weaponState;
+    private WeaponState weaponState = WeaponState.IDLE;
+    private Transform weaponHolder;
     private WeaponBase currentWeapon;
 
     public Stat Health { get { return health; } }
     public WeaponState WeaponState { get { return weaponState; } }
+    public Transform WeaponHolder { get { return weaponHolder; } }
     public WeaponBase CurrentWeapon { get { return currentWeapon; } }
 
     public void TakeDamage(DamageInfo damageInfo)

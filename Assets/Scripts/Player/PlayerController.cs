@@ -51,6 +51,7 @@ public partial class PlayerController : MonoBehaviour, IDamageable
 
     void Update()
     {
+        MoveCamera();
         isGrounded = CheckGrounded();
         if (isGrounded) {
             lastGrounded = Time.time;
@@ -63,11 +64,6 @@ public partial class PlayerController : MonoBehaviour, IDamageable
     void FixedUpdate()
     {
         stateController.FixedUpdate();
-    }
-
-    void LateUpdate()
-    {
-        MoveCamera();
     }
 
     private void OnGUI()

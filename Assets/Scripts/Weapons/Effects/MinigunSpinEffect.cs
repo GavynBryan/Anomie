@@ -22,9 +22,9 @@ public class MinigunSpinEffect : ScriptedEffect<WeaponBase, float>
     public override void UpdateEffect(WeaponBase controller) 
     {
         float velocity = controller.CustomProperties[CustomWeaponProperty.BarrelVelocity];
-        controller.Barrel.Rotate(0, velocity, 0, Space.Self);
+        controller.Barrel.Rotate(0, -velocity * Time.deltaTime, 0, Space.Self);
 
-        velocity = Mathf.Clamp(velocity - 3 * Time.deltaTime, 0, maxSpeed);
+        velocity = Mathf.Clamp( velocity - speed * Time.deltaTime, 0, maxSpeed);
         controller.CustomProperties[CustomWeaponProperty.BarrelVelocity] = velocity;
     }
 }

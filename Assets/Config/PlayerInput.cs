@@ -8,6 +8,8 @@ public class PlayerInput
     private InputAction look;
     private InputAction jump;
     private InputAction fire;
+
+    private Vector2 smoothLookVector = Vector2.zero;
     public PlayerInput()
     {
         controls = new PlayerControls();
@@ -42,7 +44,9 @@ public class PlayerInput
 
     public Vector2 GetLookVector()
     {
-        return look.ReadValue<Vector2>();
+        var raw = look.ReadValue<Vector2>();
+        smoothLookVector = Vector2.Lerp(smoothLookVector, raw, 35 * Time.deltaTime);
+        return smoothLookVector;
     }
     public bool GetJumpPressed()
     {

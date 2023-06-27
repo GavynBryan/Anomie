@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7153f050b2cf314abc5c758716b7748, type: 3}
   m_Name: Minigun Spin Effect
   m_EditorClassIdentifier: 
-  speed: 1
-  maxSpeed: 3.25
+  speed: 200
+  maxSpeed: 400

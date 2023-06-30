@@ -47,6 +47,8 @@ public partial class PlayerController : MonoBehaviour, IDamageable
         currentWeapon = GetComponentInChildren<WeaponBase>();
         currentWeapon.AssignToPlayer(this);
         weaponHolder = playerCamera.transform.Find("Weapon");
+        
+        ApplyLegModule(legModule);
     }
 
     void Update()

@@ -3,15 +3,12 @@ using UnityEngine.InputSystem.XR;
 
 public partial class PlayerController : MonoBehaviour, IDamageable
 {
+    [SerializeField] private PlayerLegs legModule;
+    public PlayerLegs LegModule { get { return legModule; } }
+
     #region Properties
+
     [Header("Movement Properties")]
-    [SerializeField] private float moveSpeed;
-    [SerializeField] private float sprintMultiplier;
-    [SerializeField] private float jumpForce;
-    [SerializeField] private float airFriction;
-    [SerializeField] private float gravityMultiplier;
-    [SerializeField] private float groundFriction;
-    [SerializeField] private float slideAngle;
     [SerializeField] private float slideFriction;
     [SerializeField] private float groundedCast;
     [SerializeField] private float airborneGroundedCast;
@@ -25,12 +22,12 @@ public partial class PlayerController : MonoBehaviour, IDamageable
     private float groundAngle;
     private float lastGrounded = 0;
 
-    public float MoveSpeed { get { return moveSpeed; } }
-    public float JumpForce { get { return jumpForce; } }
-    public float AirFriction { get { return airFriction; } }
-    public float GroundFriction { get { return groundFriction; } }
-    public float GravityMultiplier { get { return gravityMultiplier; } }
-    public float SlideAngle { get { return slideAngle; } }
+    public float MoveSpeed { get { return legModule.moveSpeed; } }
+    public float JumpForce { get { return legModule.jumpForce; } }
+    public float AirFriction { get { return legModule.airFriction; } }
+    public float GroundFriction { get { return legModule.groundFriction; } }
+    public float GravityMultiplier { get { return legModule.gravityMultiplier; } }
+    public float SlideAngle { get { return legModule.slideAngle; } }
     public float SlideFriction { get { return slideFriction; } }
     public Vector3 Velocity { get { return velocity; } set { velocity = value; } }
     public Vector3 TargetVelocity { get { return targetVelocity; } set { targetVelocity = value; } }
@@ -41,6 +38,12 @@ public partial class PlayerController : MonoBehaviour, IDamageable
     #endregion
 
     #region Methods
+
+    public void ApplyLegModule(PlayerLegs legs)
+    {
+        legModule = legs;
+    }
+
     private bool CheckGrounded()
     {
         float dist = isGrounded ? groundedCast : airborneGroundedCast;
@@ -62,7 +65,7 @@ public partial class PlayerController : MonoBehaviour, IDamageable
         RaycastHit ground;
         Vector3 origin = new Vector3(transform.position.x, currentGround.point.y, transform.position.z);
         if (Physics.Raycast(origin, Vector3.down, out ground, 0.4f, 1, QueryTriggerInteraction.Ignore)) {
-            if (Vector3.Angle(ground.normal, Vector3.up) < slideAngle) {
+            if (Vector3.Angle(ground.normal, Vector3.up) < legModule.slideAngle) {
                 return true;
             }
         }
@@ -95,12 +98,12 @@ public partial class PlayerController : MonoBehaviour, IDamageable
 
     public bool ShouldSlide
     {
-        get { return groundAngle >= slideAngle; }
+        get { return groundAngle >= legModule.slideAngle; }
     }
 
     public void ApplyGravity()
     {
-        velocity.y += Physics.gravity.y * gravityMultiplier * Time.deltaTime;
+        velocity.y += Physics.gravity.y * legModule.gravityMultiplier * Time.deltaTime;
     }
 
     protected void OrientPlayerToDirection()

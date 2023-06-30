@@ -45,7 +45,7 @@ public class PlayerInput
     public Vector2 GetLookVector()
     {
         var raw = look.ReadValue<Vector2>();
-        smoothLookVector = Vector2.Lerp(smoothLookVector, raw, 35 * Time.deltaTime);
+        smoothLookVector = Vector2.Lerp(smoothLookVector, raw, 40 * Time.deltaTime);
         return smoothLookVector;
     }
     public bool GetJumpPressed()

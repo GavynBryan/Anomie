@@ -10,13 +10,15 @@ public class WeaponBase : MonoBehaviour
     [SerializeField] protected float recoil;
     [SerializeField] protected bool continuous;
     [SerializeField] protected Transform barrel;
-    [SerializeField] protected SimpleBehaviour<WeaponBehaviorMapper> behavior;
+    [SerializeField] protected WeaponBehavior<WeaponBehaviorMapper> behavior;
     [SerializeField] protected ScriptedEffect<WeaponBase, float> effect;
+    [SerializeField] protected AudioClip shotSound;
+    [SerializeField] protected AudioSource audioSource;
 
     protected Transform origin;
     protected Dictionary<CustomWeaponProperty, float> customProperties;
 
-    private float lastFireTime = Mathf.NegativeInfinity;
+    private float nextFireTime;
     private WeaponBehaviorMapper mapper;
 
     public float FireRate { get { return fireRate; } }
@@ -48,21 +50,25 @@ public class WeaponBase : MonoBehaviour
         mapper = new WeaponBehaviorMapper(player.PlayerCamera.transform, gameObject);
     }
 
-    public virtual bool Fire()
+    public virtual bool Fire(bool holdingTrigger)
     {
-        if (Time.time - lastFireTime >= fireRate) {
-            lastFireTime = Time.time;
-            behavior.Execute(mapper);
+        if (nextFireTime < Time.time) {
+
+            if (!holdingTrigger) {
+                nextFireTime = Time.time;
+            }
+
+            //Compensate for lag on lower end machines
+            int shots = 0;
+            while(nextFireTime <=  Time.time) {
+                audioSource.PlayOneShot(shotSound);
+                nextFireTime += fireRate;
+                shots++;
+            }
+            behavior.Execute(mapper, shots);
             effect?.Trigger(this);
             return true;
         }
         return false;
-    }
-
-    public virtual void FireContinuously()
-    {
-        if(continuous) {
-            Fire();
-        }
     }
 }

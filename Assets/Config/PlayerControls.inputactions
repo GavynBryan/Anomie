@@ -40,6 +40,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Use",
+                    "type": "Button",
+                    "id": "dd25497e-cb2f-4995-90e1-2f3a34085d13",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -271,6 +280,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55a729d0-8d59-43c7-9850-95a9066472f1",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "KBM",
+                    "action": "Use",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

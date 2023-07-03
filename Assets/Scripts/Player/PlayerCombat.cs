@@ -19,22 +19,22 @@ public partial class PlayerController : MonoBehaviour, IDamageable
     public Transform WeaponHolder { get { return weaponHolder; } }
     public WeaponBase CurrentWeapon { get { return currentWeapon; } }
 
-    public void TakeDamage(DamageInfo damageInfo)
+    public void TakeDamage(DamageInfo _info, Vector3 _position)
     {
-        health -= damageInfo.Damage;
+        health -= _info.Damage;
     }
 
     public void FireWeapon()
     {
         if (weaponState == WeaponState.IDLE) {
-            currentWeapon.Fire();
+            currentWeapon.Fire(false);
         }
     }
 
     public void FireWeaponHold()
     {
         if(weaponState == WeaponState.IDLE) {
-            currentWeapon.FireContinuously();
+            currentWeapon.Fire(true);
         }
     }
 }

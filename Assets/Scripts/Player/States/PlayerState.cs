@@ -33,6 +33,9 @@ public class PlayerState : State
         } else if(controller.PlayerInput.GetFireHeld()) {
             controller.FireWeaponHold();
         }
+        if(controller.PlayerInput.GetUsePressed()) {
+            controller.Use();
+        }
     }
 
     protected virtual void Accelerate()

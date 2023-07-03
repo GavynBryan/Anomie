@@ -1,0 +1,11 @@
+﻿using UnityEngine;
+
+
+[CreateAssetMenu(menuName = "Output Events/Generic/Toggle Event")]
+public class GenericToggleEvent : OutputEvent
+{
+    public override void Fire(GameObject _subject)
+    {
+        _subject.SetActive(!_subject.activeInHierarchy);
+    }
+}

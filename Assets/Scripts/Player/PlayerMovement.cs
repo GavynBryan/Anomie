@@ -47,7 +47,7 @@ public partial class PlayerController : MonoBehaviour, IDamageable
     private bool CheckGrounded()
     {
         float dist = isGrounded ? groundedCast : airborneGroundedCast;
-        int mask = 1;
+        int mask =  1 | (1 << 7);
         bool cast = Physics.CapsuleCast(GetCapsuleBottomCenterpoint(), GetCapsuleTopCenterpoint(characterController.height),
                     characterController.radius, Vector3.down, out currentGround, dist, mask,
                     QueryTriggerInteraction.Ignore);

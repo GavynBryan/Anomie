@@ -3,21 +3,17 @@
 public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
-    private static object lockObject = new object();
-
+    private ObjectPoolManager  objectPool;
     public static GameManager Instance
     {
-        get
-        {
-            if (instance == null) {
-                new GameObject();
-            }
-
-            return instance;
-        }
+        get { return instance; }
+    }
+    public static ObjectPoolManager ObjectPool
+    {
+        get { return instance.objectPool; }
     }
 
-    protected virtual void Awake()
+    void Awake()
     {
         if (instance != null && instance != this) {
             Destroy(gameObject);
@@ -25,6 +21,7 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
+        objectPool = new ObjectPoolManager();
 
         DontDestroyOnLoad(gameObject);
     }

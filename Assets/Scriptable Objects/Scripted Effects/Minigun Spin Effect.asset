@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Minigun Spin Effect
   m_EditorClassIdentifier: 
   speed: 200
-  maxSpeed: 400
+  maxSpeed: 450

@@ -9,6 +9,8 @@ public class HitscanBehaviour : WeaponBehavior<WeaponBehaviorMapper>
     public int bulletsPerFire = 1;
     public float distance = 5;
     public float bulletWidth = 0.1f;
+
+    [SerializeField] public PooledObject DustParticles;
     #endregion
 
     public override void Execute(WeaponBehaviorMapper mapper, int shots)
@@ -24,6 +26,7 @@ public class HitscanBehaviour : WeaponBehavior<WeaponBehaviorMapper>
             if (Physics.SphereCast(origin, bulletWidth, angle, out hit, distance, mask, QueryTriggerInteraction.Ignore)) {
                 IDamageable damageableObject = hit.transform.GetComponent<IDamageable>();
                 damageableObject?.TakeDamage(damageInfo, hit.point);
+                GameManager.ObjectPool.SpawnFromPool(DustParticles, hit.point, Quaternion.LookRotation(-angle));
             }
         }
     }

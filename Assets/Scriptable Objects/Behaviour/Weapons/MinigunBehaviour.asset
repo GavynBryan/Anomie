@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 388a7184a92f8394bb75a79ecf7826a1, type: 3}
   m_Name: MinigunBehaviour
   m_EditorClassIdentifier: 
-  spread: 3
+  spread: 2.5
   damage: 2
   bulletsPerFire: 1
-  distance: 30
+  distance: 60
   bulletWidth: 0.05
+  DustParticles: {fileID: 2897194529316535592, guid: 0f3ae852af963354785eba9ea074f76a, type: 3}

@@ -2,16 +2,31 @@
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Pool;
+using UnityEngine.Rendering.Universal;
 
-public class ObjectPoolManager 
+public partial class ObjectPoolManager 
 {
     private Dictionary<PooledObject, ObjectPool<PooledObject>> objectPools;
 
-    public ObjectPoolManager()
+    private static readonly ObjectPoolManager instance = new ObjectPoolManager();
+    public static ObjectPoolManager Instance
     {
-        objectPools = new Dictionary<PooledObject, ObjectPool<PooledObject>>();
+        get { return instance; }
     }
 
+    private ObjectPoolManager()
+    {
+        objectPools = new Dictionary<PooledObject, ObjectPool<PooledObject>>();
+
+        decalPool = new Queue<DecalProjector>();
+        decalsInWorld = new Queue<DecalProjector>();
+    }
+
+    /// <summary>
+    /// Returns an instance of the prefab
+    /// </summary>
+    /// <param name="_prefab">The prefab to copy</param>
+    /// <returns></returns>
     public PooledObject SpawnFromPool(PooledObject _prefab)
     {
         ObjectPool<PooledObject> pool;
@@ -24,6 +39,12 @@ public class ObjectPoolManager
         return pool.Get();
     }
 
+    /// <summary>
+    /// Returns an instance of the prefab spawned at the given position
+    /// </summary>
+    /// <param name="_prefab">The prefab to copy</param>
+    /// <param name="_position">The position to spawn the prefab</param>
+    /// <returns></returns>
     public PooledObject SpawnFromPool(PooledObject _prefab, Vector3 _position)
     {
         PooledObject obj = SpawnFromPool(_prefab);
@@ -31,6 +52,13 @@ public class ObjectPoolManager
         return obj;
     }
 
+    /// <summary>
+    /// Returns an instance of the prefab spawn at the given position with the given rotation
+    /// </summary>
+    /// <param name="_prefab">The prefab to copy</param>
+    /// <param name="_position">The position to spawn the prefab</param>
+    /// <param name="_rotation">The rotation to spawn the prefab</param>
+    /// <returns></returns>
     public PooledObject SpawnFromPool(PooledObject _prefab, Vector3 _position, Quaternion _rotation)
     {
         PooledObject obj = SpawnFromPool(_prefab);

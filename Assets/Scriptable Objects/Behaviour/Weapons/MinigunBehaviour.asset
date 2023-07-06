@@ -18,3 +18,4 @@ MonoBehaviour:
   distance: 60
   bulletWidth: 0.05
   DustParticles: {fileID: 2897194529316535592, guid: 0f3ae852af963354785eba9ea074f76a, type: 3}
+  BulletDecal: {fileID: 845010713442757264, guid: 18230fd1502ac4f4fba268ce6e21efd9, type: 3}

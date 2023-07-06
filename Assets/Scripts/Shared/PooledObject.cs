@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.Pool;
 
+/// <summary>
+/// Base class for objects to return to an object pool when disabled
+/// </summary>
 public class PooledObject : MonoBehaviour
 {
 
@@ -13,6 +16,6 @@ public class PooledObject : MonoBehaviour
 
     void OnDisable()
     {
-        pool.Release(this);
+        pool?.Release(this);
     }
 }

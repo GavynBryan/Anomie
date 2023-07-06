@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[CreateAssetMenu(menuName = "Leg Modules/Default")]
+[CreateAssetMenu(menuName = "Scriptable Objects/Leg Modules/Default")]
 public class PlayerLegs : ScriptableObject
 {
     public float moveSpeed = 5;

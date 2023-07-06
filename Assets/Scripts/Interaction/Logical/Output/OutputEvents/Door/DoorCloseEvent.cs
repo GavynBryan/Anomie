@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-[CreateAssetMenu(menuName = "Output Events/Door/Close")]
+[CreateAssetMenu(menuName = "Scriptable Objects/Output Events/Door/Close")]
 public class DoorCloseEvent : OutputEvent
 {
     public override void Fire(GameObject _subject)

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-[CreateAssetMenu(menuName = "Output Events/Switch/Toggle")]
+[CreateAssetMenu(menuName = "Scriptable Objects/Output Events/Switch/Toggle")]
 public class SwitchToggleEvent : OutputEvent
 {
     public override void Fire(GameObject _subject)

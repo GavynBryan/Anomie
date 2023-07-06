@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-[CreateAssetMenu(menuName = "Output Events/Door/Open")]
+[CreateAssetMenu(menuName = "Scriptable Objects/Output Events/Door/Open")]
 public class DoorOpenEvent : OutputEvent
 {
     public override void Fire(GameObject _subject)

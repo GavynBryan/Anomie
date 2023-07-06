@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c4a5b6ae0f02684ba99e32a53f0b7ab, type: 3}
+  m_Name: EffectsLibrary
+  m_EditorClassIdentifier: 
+  decalLibrary:
+  - {fileID: 2100000, guid: e81b56b8ef0a63646ac0a4354e2d7d83, type: 2}
+  - {fileID: 2100000, guid: 41ecc478898641845ac7733683b09c88, type: 2}

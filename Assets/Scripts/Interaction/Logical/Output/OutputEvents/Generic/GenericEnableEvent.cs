@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-[CreateAssetMenu(menuName = "Output Events/Generic/Enable Event")]
+[CreateAssetMenu(menuName = "Scriptable Objects/Output Events/Generic/Enable Event")]
 public class GenericEnableEvent : OutputEvent
 {
     public override void Fire(GameObject _subject)

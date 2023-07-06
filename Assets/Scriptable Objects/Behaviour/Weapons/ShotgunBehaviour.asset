@@ -15,5 +15,7 @@ MonoBehaviour:
   spread: 5
   damage: 2
   bulletsPerFire: 5
-  distance: 20
+  distance: 35
   bulletWidth: 0.1
+  DustParticles: {fileID: 2897194529316535592, guid: 0f3ae852af963354785eba9ea074f76a, type: 3}
+  BulletDecal: {fileID: 0}

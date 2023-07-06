@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-[CreateAssetMenu(menuName = "Output Events/Counter/Increment")]
+[CreateAssetMenu(menuName = "Scriptable Objects/Output Events/Counter/Increment")]
 public class CounterIncrementEvent : OutputEvent
 {
     public override void Fire(GameObject _subject)

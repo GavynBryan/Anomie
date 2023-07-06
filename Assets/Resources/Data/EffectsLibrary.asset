@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7153f050b2cf314abc5c758716b7748, type: 3}
-  m_Name: Minigun Spin Effect
+  m_Script: {fileID: 11500000, guid: 5c4a5b6ae0f02684ba99e32a53f0b7ab, type: 3}
+  m_Name: EffectsLibrary
   m_EditorClassIdentifier: 
-  speed: 200
-  maxSpeed: 400
+  decalLibrary:
+  - {fileID: 2100000, guid: e81b56b8ef0a63646ac0a4354e2d7d83, type: 2}
+  - {fileID: 2100000, guid: 41ecc478898641845ac7733683b09c88, type: 2}

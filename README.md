@@ -1,4 +1,5 @@
 # Anomie
-Upcoming FPS game that features fast-paced action, puzzle solving and traversing through a brutalist sci-fi hellscape. Made in Unity3D.
+First person shooter game made in Unity.
+Project has been cancelled in favor of moving it to Unreal Engine.
 
-Keeping this repository public for the sake of accountability. There is no documentation currently.
+Code in this project will be repurposed to create a general FPS framework with a working weapon system and object pooling.
